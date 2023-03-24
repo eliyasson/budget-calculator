@@ -1,10 +1,19 @@
 import React from 'react'
 
 const ExpenseItem = () => {
+  
+
   return (
-    <div>
-      hello from expense item
-    </div>
+    <li>
+      <div>
+        <span>{charge}</span>
+        <span>€{amount}</span>
+      </div>
+      <div>
+        <button>edit</button>
+        <button>delete</button>
+      </div>
+    </li>
   )
 }
 
