@@ -1,12 +1,18 @@
 import React from 'react'
 import ExpenseItem from './ExpenseItem'
 
-const ExpenseList = () => {
+const ExpenseList = ({expenses}) => {
   return (
-    <div>
-      hello from expense list
-      <ExpenseItem />
-    </div>
+    <>
+        <ul>
+            {expenses.map((expense) => {
+                return <ExpenseItem key={expense.id} expense={expense}/>
+            })}
+        </ul>
+        {expenses.length > 0 && <button className='btn'>
+            Clear Expenses</button>}
+      
+    </>
   )
 }
 

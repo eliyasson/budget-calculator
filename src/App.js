@@ -3,30 +3,53 @@ import './App.css';
 import ExpenseList from './components/ExpenseList';
 import ExpenseForm from './components/ExpenseForm';
 import Alert from './components/Alert';
-import { v4 as uuidv4 } from 'uuid';
-
-const intialExpenses = [
-  {id: uuidv4(), charge:"rent", amount: 1600},
-  {id: uuidv4(), charge:"rent1", amount: 100},
-  {id: uuidv4(), charge:"rent2", amount: 1800}
-];
-
-const numbers = [1, 2, 3, 4, 5];
 
 
 function App() {
-  const [expenses, setExpenses] = useState(intialExpenses);
-  console.log(expenses);
+  //The expenses state variable should be initialized as an empty array, since it will hold a list of expenses.
+  //The setExpenses function should be used to add a new expense to the expenses list
+  const [expenses, setExpenses] = useState([]); 
+  
+  const [charge, setCharge] = useState("");
+  const [amount, setAmount] = useState("");
+
+  const handleCharge = (e) => {
+    setCharge(e.target.value);
+  }
+  const handleAmount = (e) => {
+    setAmount(e.target.value);
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const newExpense = {
+      amount: parseFloat(amount), //The amount field should be converted to a float before creating a new expense object.
+      charge: charge,
+    }
+
+    setExpenses([...expenses, newExpense])
+
+    setCharge("");
+    setAmount("");
+  }
+
+  const handleDelete = (id) => {
+    const newExpense = expenses.filter((expense) => {
+      return expense.id !== id;
+    })
+    setExpenses(newExpense);
+  }
   return (
     <>
       <Alert/>
       <h1>budget calculator</h1>
       <main className='App'>
-        <ExpenseForm />
+        <ExpenseForm handleCharge={handleCharge} handleAmount={handleAmount} handleSubmit={handleSubmit} charge={charge} amount={amount}/>
         <ExpenseList expenses={expenses}/>
       </main>
       <h1>
-        total spensing: €{expenses.reduce((accumulator, currentValue) => {
+        total spending: €{expenses.reduce((accumulator, currentValue) => {
           return accumulator += currentValue.amount;
         }, 0)}
       </h1>
