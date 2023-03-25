@@ -24,6 +24,7 @@ function App() {
     e.preventDefault();
 
     const newExpense = {
+      id: Math.floor(Math.random() * 1000),
       amount: parseFloat(amount), //The amount field should be converted to a float before creating a new expense object.
       charge: charge,
     }
@@ -46,7 +47,7 @@ function App() {
       <h1>budget calculator</h1>
       <main className='App'>
         <ExpenseForm handleCharge={handleCharge} handleAmount={handleAmount} handleSubmit={handleSubmit} charge={charge} amount={amount}/>
-        <ExpenseList expenses={expenses}/>
+        <ExpenseList expenses={expenses} handleDelete={handleDelete}/>
       </main>
       <h1>
         total spending: €{expenses.reduce((accumulator, currentValue) => {

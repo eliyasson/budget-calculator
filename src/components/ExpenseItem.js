@@ -1,17 +1,16 @@
 import React from 'react'
 
-const ExpenseItem = () => {
+const ExpenseItem = ({handleDelete, expense: { id, charge, amount }}) => {
   
 
   return (
     <li>
       <div>
-        <span>{charge}</span>
-        <span>€{amount}</span>
+        <span>{charge} {amount}€</span>
       </div>
       <div>
         <button>edit</button>
-        <button>delete</button>
+        <button onClick={() =>handleDelete(id)}>delete</button>
       </div>
     </li>
   )
